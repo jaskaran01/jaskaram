@@ -61,18 +61,21 @@ function osname ()
 
 function CPUdescription ()
 {
-    
- return 0
+	echo "CPU description : "$(cat /proc/cpuinfo|grep 'model name'|head -n 1|cut -d\: -f2|sed 's/^ //')
+	return 0
 }
 
 function meminstalled ()
-{
-return 0
+{	
+	totalm=$(free -m -h| awk '/^Mem:/{print $2}')
+	echo "memory installed : $totalm"
+	return 0
 }
 
 function avdiskspace ()
 {
-return 0
+	echo "available diskspace : "$(df -Ph . | tail -1 | awk '{print $4}')
+	return 0
 }
 
 function printers ()
